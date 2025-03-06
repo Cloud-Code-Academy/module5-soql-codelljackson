@@ -1,4 +1,5 @@
 /**
+ * Week 5
  * The SOQL class serves as a primer into the Salesforce Object Query Language in Apex.
  * It covers fundamental aspects such as SELECT statements, WHERE clauses, Relationship queries, and LIMIT keyword.
  *
@@ -16,7 +17,7 @@
  * Users of this class can expect to gain a solid understanding of SOQL in Apex and
  * be prepared to handle data retrieval tasks in Salesforce development.
  *
- * @author Your Name
+ * @author Codell L. Jackson
  */
 
 public with sharing class SOQL {
@@ -27,9 +28,12 @@ public with sharing class SOQL {
 	 * @return List of all leads with Id, LastName, Company, Phone, Email
 	 * Update the corresponding test class and testGetAllLeads method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Lead> getAllLeads () {
+
+		List<Lead> myleads = [SELECT Id, LastName, Company, Phone, Email FROM Lead];
+		return myleads; 
+
+	}
 
 	/**
 	 * Question 2
