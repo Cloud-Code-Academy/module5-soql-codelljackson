@@ -48,8 +48,8 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
-	static void testGetContactsByFirstName() {
+	@IsTest //Q2
+	static void testGetAllContacts() {//GetContactsByFirstName
 		// Create test data
 		Contact testContact1 = new Contact(FirstName = 'John', LastName = 'Doe');
 		Contact testContact2 = new Contact(FirstName = 'John', LastName = 'Smith');
@@ -57,23 +57,23 @@ public class SOQLTest {
 		insert new List<Contact>{ testContact1, testContact2, testContact3 };
 
 		// Call the method to test
-		List<Contact> contacts = null; //Replace null with your method call from SOQL class
+		List<Contact> contacts = SOQL.getAllContacts(); //Replace null with your method call from SOQL class
 
 		// Assert that the number of contacts returned is correct
 		System.assertEquals(2, contacts.size(), 'Number of contacts returned is incorrect.');
 
 		// Assert that the contacts returned have the correct names
-		Set<String> contactNames = new Set<String>{ 'John Doe', 'John Smith' };
+		Set<String> contactNames = new Set<String>{'John Doe', 'John Smith'};
 		try {
 			for (Contact contact : contacts) {
 				System.assert(contactNames.contains(contact.Name), 'Contact name is incorrect.');
 			}
 		} catch (SObjectException ex) {
-			Assert.fail('SObjectException thrown: ' + ex.getMessage());
+			System.assert(false, 'SObjectException thrown: ' + ex.getMessage());
 		}
 	}
 
-	@IsTest
+	@IsTest //3
 	static void testGetContactIdsByLastName() {
 		// Create test data
 		Contact testContact1 = new Contact(FirstName = 'John', LastName = 'Smith');
@@ -82,7 +82,7 @@ public class SOQLTest {
 		insert new List<Contact>{ testContact1, testContact2, testContact3 };
 
 		// Call the method to test
-		List<Id> contactIds = null; //Replace null with your method call from SOQL class
+		List<Id> contactIds = SOQL.getContactIdsByLastName(); //Replace null with your method call from SOQL class
 
 		// Assert that the number of contact IDs returned is correct
 		System.assertEquals(2, contactIds.size(), 'Number of contact IDs returned is incorrect.');
@@ -92,7 +92,7 @@ public class SOQLTest {
 		System.assertEquals(expectedContactIds, new Set<Id>(contactIds), 'Returned contact IDs are incorrect.');
 	}
 
-	@IsTest
+	@IsTest //4
 	static void testGetClosedWonOpportunityCountByAccount() {
 		// Create test data
 		Account testAccount = new Account(Name = 'Test Account');
@@ -122,7 +122,7 @@ public class SOQLTest {
 		insert new List<Opportunity>{ testOpportunity1, testOpportunity2, testOpportunity3 };
 
 		// Call the method to test
-		List<Opportunity> opportunities = null; //Replace null with your method passing in testAccount.Id
+		List<Opportunity> opportunities = SOQL.getClosedWonOpportunityCountByAccount(testAccount.Id) ; //Replace null with your method passing in testAccount.Id
 
 		// Assert that the number of opportunities returned is correct
 		System.assertEquals(2, opportunities.size(), 'Number of opportunities returned is incorrect.');

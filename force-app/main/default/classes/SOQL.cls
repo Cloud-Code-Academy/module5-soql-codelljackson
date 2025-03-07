@@ -42,9 +42,11 @@ public with sharing class SOQL {
 	 * @return A list of Contact records.
 	 * Update the corresponding test class and testGetContactsByFirstName method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Contact> getAllContacts() {
+
+		List<Contact> contacts = [SELECT Name FROM Contact WHERE FirstName = 'John'];
+		return contacts; 
+	}
 
 	/**
 	 * Question 3
@@ -53,9 +55,17 @@ public with sharing class SOQL {
 	 * @return A list of Contact Ids.
 	 * Update the corresponding test class and testGetContactIdsByLastName method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Id> getContactIdsByLastName() {
+
+		List<Contact> contacts = [SELECT Id FROM Contact WHERE LastName IN ('Smith', 'Jones')];
+
+		List<Id> contactIds = new List<Id>();
+
+		for (Contact mycontact : contacts){
+			contactIds.add(mycontact.Id);
+	}
+		return contactIds;
+}
 
 	/**
 	 * Question 4
@@ -66,9 +76,15 @@ public with sharing class SOQL {
 	 * @return A list of Opportunities with important opportunities fields
 	 * Update the corresponding test class and testGetClosedWonOpportunityCountByAccount method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Opportunity> getClosedWonOpportunityCountByAccount(Id accountId) {
+	
+		List<Opportunity> opportunities = [SELECT Name, Id, CloseDate, Amount, StageName, AccountId
+											FROM Opportunity 
+											WHERE StageName = 'Closed Won' 
+											AND AccountId = :accountId];
+		return opportunities; 
+	}
+	
 
 	/**
 	 * Question 5
