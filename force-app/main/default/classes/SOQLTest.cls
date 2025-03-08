@@ -142,7 +142,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //5
 	static void testGetAccountCount() {
 		// Generate random number of test account between 1 and 10
 		Integer numAccounts = (Integer) Math.floor(Math.random() * 10) + 1;
@@ -153,13 +153,13 @@ public class SOQLTest {
 		insert accounts;
 
 		// Call the method to test
-		Integer accountCount = null; //Replace null with your method call from SOQL class
+		Integer accountCount = SOQL.getAccountCount(); //Replace null with your method call from SOQL class
 
 		// Assert that the number of accounts returned is correct
 		System.assertEquals(numAccounts, accountCount, 'Number of accounts returned is incorrect.');
 	}
 
-	@IsTest
+	@IsTest//6
 	static void testGetTasksDueNextWeek() {
 		// Create test data
 		Task testTask1 = new Task(Subject = 'Test Task 1', ActivityDate = Date.today().addDays(7)); // due in 7 days
@@ -170,7 +170,7 @@ public class SOQLTest {
 		insert new List<Task>{ testTask1, testTask2, testTask3 };
 
 		// Call the method to test
-		Map<Id, Task> tasks = null; //Replace null with your method call from SOQL class
+		Map<Id, Task> tasks = SOQL.getTasksDueNextWeek(); //Replace null with your method call from SOQL class
 
 		// Assert that the number of tasks returned is correct
 		System.assertEquals(2, tasks.size(), 'Number of tasks returned is incorrect.');
