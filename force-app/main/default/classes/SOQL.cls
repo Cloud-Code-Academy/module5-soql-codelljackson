@@ -1,4 +1,5 @@
 /**
+ * Week 5
  * The SOQL class serves as a primer into the Salesforce Object Query Language in Apex.
  * It covers fundamental aspects such as SELECT statements, WHERE clauses, Relationship queries, and LIMIT keyword.
  *
@@ -16,7 +17,7 @@
  * Users of this class can expect to gain a solid understanding of SOQL in Apex and
  * be prepared to handle data retrieval tasks in Salesforce development.
  *
- * @author Your Name
+ * @author Codell L. Jackson
  */
 
 public with sharing class SOQL {
@@ -27,9 +28,12 @@ public with sharing class SOQL {
 	 * @return List of all leads with Id, LastName, Company, Phone, Email
 	 * Update the corresponding test class and testGetAllLeads method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Lead> getAllLeads () {
+
+		List<Lead> myleads = [SELECT Id, LastName, Company, Phone, Email FROM Lead];
+		return myleads; 
+
+	}
 
 	/**
 	 * Question 2
@@ -38,9 +42,11 @@ public with sharing class SOQL {
 	 * @return A list of Contact records.
 	 * Update the corresponding test class and testGetContactsByFirstName method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Contact> getAllContacts() {
+
+		List<Contact> contacts = [SELECT Name FROM Contact WHERE FirstName = 'John'];
+		return contacts; 
+	}
 
 	/**
 	 * Question 3
@@ -49,9 +55,17 @@ public with sharing class SOQL {
 	 * @return A list of Contact Ids.
 	 * Update the corresponding test class and testGetContactIdsByLastName method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Id> getContactIdsByLastName() {
+
+		List<Contact> contacts = [SELECT Id FROM Contact WHERE LastName IN ('Smith', 'Jones')];
+
+		List<Id> contactIds = new List<Id>();
+
+		for (Contact mycontact : contacts){
+			contactIds.add(mycontact.Id);
+	}
+		return contactIds;
+}
 
 	/**
 	 * Question 4
@@ -62,9 +76,15 @@ public with sharing class SOQL {
 	 * @return A list of Opportunities with important opportunities fields
 	 * Update the corresponding test class and testGetClosedWonOpportunityCountByAccount method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Opportunity> getClosedWonOpportunityCountByAccount(Id accountId) {
+	
+		List<Opportunity> opportunities = [SELECT Name, Id, CloseDate, Amount, StageName, AccountId
+											FROM Opportunity 
+											WHERE StageName = 'Closed Won' 
+											AND AccountId = :accountId];
+		return opportunities; 
+	}
+	
 
 	/**
 	 * Question 5
@@ -73,9 +93,12 @@ public with sharing class SOQL {
 	 * @return The Integer count of Account records.
 	 * Update the corresponding test class and testGetAccountCount method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static Integer getAccountCount() {
+		
+		Integer numAccount= [SELECT COUNT() FROM Account];	
+		return numAccount; 
+
+	}
 
 	/**
 	 * Question 6
@@ -84,9 +107,12 @@ public with sharing class SOQL {
 	 * @return A map of Task Ids to Task records.
 	 * Update the corresponding test class and testGetTasksDueNextWeek method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static Map<Id, Task> getTasksDueNextWeek() {
+
+		List<Task> tasks = [SELECT Id, ActivityDate FROM Task WHERE ActivityDate = NEXT_N_DAYS:7];
+		Map<Id, Task> taskMap = new Map<Id, Task>(tasks); 
+		return taskMap; 
+	}
 
 	/**
 	 * Question 7
@@ -95,9 +121,13 @@ public with sharing class SOQL {
 	 * @return A list of Contact records.
 	 * Update the corresponding test class and testGetContactsByEmailDomain method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Contact> getContactsByEmailDomain() {
+	
+		String emailDomain = '%example.com%';
+
+		List<Contact> contacts = [SELECT Id, Name, Email FROM Contact WHERE EMAIL LIKE :emailDomain];
+		return contacts; 
+	}
 
 	/**
 	 * Question 8
@@ -107,7 +137,11 @@ public with sharing class SOQL {
 	 * @return A list of Opportunity records.
 	 */
 	public static List<Opportunity> getOpportunitiesByNameKeyword(String keyword) {
-		return null; // Replace null with the variable you used to store the result
+
+		keyword = '%' + keyword + '%'; 
+
+		List<Opportunity> opportunities = [SELECT Id, Name FROM Opportunity WHERE Name LIKE :keyword];
+		return opportunities; // Replace null with the variable you used to store the result
 	}
 
 	/**
@@ -116,7 +150,9 @@ public with sharing class SOQL {
 	 * @return A list of Case records.
 	 */
 	public static List<Case> getFilterCaseOrigins() {
-		return null; // Replace null with the variable you used to store the result
+
+		List<Case> cases = [SELECT Id, AccountId, Origin  FROM Case WHERE Origin NOT IN ('Web', 'Email', '') ];
+		return cases; // Replace null with the variable you used to store the result
 	}
 
 	/**
@@ -125,13 +161,19 @@ public with sharing class SOQL {
 	 * Retrieves all Leads that have a specific Lead Source or contain a specific keyword in their Title.
 	 * Example: yourMethodName('Web', 'Engineer') should return all Leads that have 'Web' in their Lead Source or 'Engineer' in their Title.
 	 * @param leadSource The Lead Source to search for.
-	 * @param keyword The keyword to search for in the Lead Title.
+	 * @param keyWord The keyword to search for in the Lead Title.
 	 * @return A list of Lead records.
 	 * Update the corresponding test class and testGetLeadsBySourceOrTitle method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Lead> getLeadsBySourceOrTitle(String leadSource, String keyWord) {
+
+		leadSource = '%Web%';
+		keyWord = '%' + keyWord + '%';
+	
+		List<Lead> leads = [SELECT Id, LeadSource, Title FROM Lead WHERE LeadSource = :leadSource OR Title LIKE :keyWord];
+		return leads; 
+
+	}
 
 	/**
 	 * Question 11
