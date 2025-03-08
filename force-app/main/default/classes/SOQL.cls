@@ -121,9 +121,13 @@ public with sharing class SOQL {
 	 * @return A list of Contact records.
 	 * Update the corresponding test class and testGetContactsByEmailDomain method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Contact> getContactsByEmailDomain() {
+	
+		String emailDomain = '%example.com%';
+
+		List<Contact> contacts = [SELECT Id, Name, Email FROM Contact WHERE EMAIL LIKE :emailDomain];
+		return contacts; 
+	}
 
 	/**
 	 * Question 8
@@ -133,7 +137,11 @@ public with sharing class SOQL {
 	 * @return A list of Opportunity records.
 	 */
 	public static List<Opportunity> getOpportunitiesByNameKeyword(String keyword) {
-		return null; // Replace null with the variable you used to store the result
+
+		keyword = '%' + keyword + '%'; 
+
+		List<Opportunity> opportunities = [SELECT Id, Name FROM Opportunity WHERE Name LIKE :keyword];
+		return opportunities; // Replace null with the variable you used to store the result
 	}
 
 	/**
@@ -142,7 +150,9 @@ public with sharing class SOQL {
 	 * @return A list of Case records.
 	 */
 	public static List<Case> getFilterCaseOrigins() {
-		return null; // Replace null with the variable you used to store the result
+
+		List<Case> cases = [SELECT Id, AccountId, Origin  FROM Case WHERE Origin NOT IN ('Web', 'Email', '') ];
+		return cases; // Replace null with the variable you used to store the result
 	}
 
 	/**
@@ -151,13 +161,19 @@ public with sharing class SOQL {
 	 * Retrieves all Leads that have a specific Lead Source or contain a specific keyword in their Title.
 	 * Example: yourMethodName('Web', 'Engineer') should return all Leads that have 'Web' in their Lead Source or 'Engineer' in their Title.
 	 * @param leadSource The Lead Source to search for.
-	 * @param keyword The keyword to search for in the Lead Title.
+	 * @param keyWord The keyword to search for in the Lead Title.
 	 * @return A list of Lead records.
 	 * Update the corresponding test class and testGetLeadsBySourceOrTitle method to cover this method
 	 */
-	//[public | private ] [static] data_type method_name (input parameters) {
-	//  The body of the method
-	//}
+	public static List<Lead> getLeadsBySourceOrTitle(String leadSource, String keyWord) {
+
+		leadSource = '%Web%';
+		keyWord = '%' + keyWord + '%';
+	
+		List<Lead> leads = [SELECT Id, LeadSource, Title FROM Lead WHERE LeadSource = :leadSource OR Title LIKE :keyWord];
+		return leads; 
+
+	}
 
 	/**
 	 * Question 11

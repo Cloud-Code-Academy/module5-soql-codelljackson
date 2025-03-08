@@ -180,7 +180,7 @@ public class SOQLTest {
 		System.assertEquals(expectedTaskIds, tasks.keySet(), 'Returned tasks are incorrect.');
 	}
 
-	@IsTest
+	@IsTest //7
 	static void testGetContactsByEmailDomain() {
 		// Create test data
 		Contact testContact1 = new Contact(FirstName = 'John', LastName = 'Doe', Email = 'john@example.com');
@@ -189,7 +189,7 @@ public class SOQLTest {
 		insert new List<Contact>{ testContact1, testContact2, testContact3 };
 
 		// Call the method to test
-		List<Contact> contacts = null; //Replace null with your method call from SOQL class
+		List<Contact> contacts = SOQL.getContactsByEmailDomain(); //Replace null with your method call from SOQL class
 
 		// Assert that the number of contacts returned is correct
 		System.assertEquals(2, contacts.size(), 'Number of contacts returned is incorrect.');
@@ -206,7 +206,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //8
 	static void testGetOpportunitiesByNameKeyword() {
 		// Create test data
 		Account testAccount = new Account(Name = 'Test Account');
@@ -251,7 +251,7 @@ public class SOQLTest {
 		System.assertEquals(0, opportunities.size(), 'Number of opportunities returned is incorrect.');
 	}
 
-	@IsTest
+	@IsTest //9
 	static void testGetFilterCaseOrigins() {
 		// Create test data
 		Account testAccount = new Account(Name = 'Test Account');
@@ -281,7 +281,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //10
 	static void testGetLeadsBySourceOrTitle() {
 		// Create test data
 		Lead testLead1 = new Lead(
