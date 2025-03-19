@@ -346,7 +346,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //11
 	static void testGetContactNamesByAccount() {
 		// Create test data
 		// Generate random number of accounts and contacts between 1 and 10
@@ -393,7 +393,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //12
 	static void testGetTotalRevenueByStage() {
 		// Create test data
 		Opportunity testOpp1 = new Opportunity(
@@ -430,7 +430,7 @@ public class SOQLTest {
 		System.assertEquals(expectedRevenue, totalRevenue, 'Total revenue is incorrect.');
 	}
 
-	@IsTest
+	@IsTest //13
 	static void testGetFirstTenAccounts() {
 		// Create test data
 		List<Account> accounts = new List<Account>();
@@ -454,7 +454,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //14
 	static void testGetHighValueOpportunities() {
 		// Create test data
 		Account testAccount = new Account(Name = 'Test Account');
@@ -490,7 +490,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //15
 	static void testGetBirthdateContacts() {
 		// Create test data
 		List<Contact> contacts = new List<Contact>();
@@ -519,7 +519,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //16
 	static void testGetCasesWithStatus() {
 		// Create test data
 		List<Case> cases = new List<Case>();
@@ -552,7 +552,7 @@ public class SOQLTest {
 		System.assertEquals(cases[5].Id, returnedCases[0].Id, 'First case returned is not the 6th case created.');
 	}
 
-	@IsTest
+	@IsTest //17
 	static void testGetCaseIdsByAccount() {
 		// Create test data
 		// Generate random number of accounts and cases between 1 and 10
@@ -597,7 +597,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //18
 	static void testGetAccountIdsToNamesNotInCountry() {
 		// Create test data
 		Account testAccount1 = new Account(Name = 'Test Account 1', BillingCountry = 'United States');
@@ -621,7 +621,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //19
 	static void testGetAccountNameForContact() {
 		// Create test data
 		Account testAccount1 = new Account(Name = 'Test Account 1');
@@ -637,7 +637,7 @@ public class SOQLTest {
 		System.assertEquals('Test Account 1', accountName, 'Returned account name is incorrect.');
 	}
 
-	@IsTest
+	@IsTest //20
 	static void testGetAccountAndOpportunitiesFromAccountId() {
 		// Create test data
 		Account testAccount1 = new Account(Name = 'Test Account 1');
@@ -675,7 +675,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //21
 	static void testGetAccountsWithContactsByState() {
 		// Create test data
 		// Generate random number of accounts and contacts between 1 and 10
@@ -723,7 +723,7 @@ public class SOQLTest {
 		);
 	}
 
-	@IsTest
+	@IsTest //22
 	static void testFindAccountsByLeadEmailDomains() {
 		// Create test data
 		// Generate random number of leads between 1 and 10
@@ -797,7 +797,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //23
 	static void testCloneLineItems() {
 		// Create test data
 		Account testAccount1 = new Account(Name = 'Test Account 1');
@@ -857,7 +857,7 @@ public class SOQLTest {
 		System.assertEquals(100, clonedLineItems[0].UnitPrice, 'Cloned line item UnitPrice is incorrect.');
 	}
 
-	@IsTest
+	@IsTest //24
 	static void testGetOpportunityDetailsForClosedWon() {
 		// Create test data
 		Account testAccount1 = new Account(Name = 'Test Account 1');
@@ -898,7 +898,7 @@ public class SOQLTest {
 		}
 	}
 
-	@IsTest
+	@IsTest //25
 	static void testSetPrimaryContact() {
 		// Create test data
 		Account testAccount1 = new Account(Name = 'Test Account 1');
