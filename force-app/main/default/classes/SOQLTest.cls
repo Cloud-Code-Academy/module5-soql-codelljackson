@@ -10,7 +10,7 @@
 @IsTest
 public class SOQLTest {
 
-	@IsTest
+	@IsTest //1
 	static void testGetAllLeads() {
 		// Create test data
 		Lead testLead1 = new Lead(
@@ -327,7 +327,7 @@ public class SOQLTest {
 		insert new List<Lead>{ testLead1, testLead2, testLead3, testLead4 };
 
 		// Call the method to test
-		List<Lead> leads = null; //Replace null with your method passing 'Web', 'Engineer'
+		List<Lead> leads = SOQL.getLeadsBySourceOrTitle('Web', 'Engineer');//Replace null with your method passing 'Web', 'Engineer'
 
 		// Assert that the number of leads returned is correct
 		System.assertEquals(3, leads.size(), 'Number of leads returned is incorrect.');
@@ -930,17 +930,17 @@ public class SOQLTest {
 
 		// Query for the updated Opportunity
 		// HINT: The repository has the primary contact field. You will need to figure out how to deploy it force-app\main\default\objects\Opportunity\fields\Primary_Contact__c.field-meta.xml
-	//E Map<Id, Opportunity> oppMap = new Map<Id, Opportunity>([SELECT Id, Primary_Contact__c FROM Opportunity]);
+		Map<Id, Opportunity> oppMap = new Map<Id, Opportunity>([SELECT Id, Primary_Contact__c FROM Opportunity]);
 
 		// Assert that the Primary Contact was set correctly
 		System.assertEquals(
 			testContact2.Id,
-		//E	 oppMap.get(closeWonOpp.Id).Primary_Contact__c,
+			oppMap.get(closeWonOpp.Id).Primary_Contact__c,
 			'Primary Contact was not set correctly.'
 		);
 		System.assertEquals(
 			null,
-		//E	oppMap.get(prospectingOpp.Id).Primary_Contact__c,
+			oppMap.get(prospectingOpp.Id).Primary_Contact__c,
 			'Primary Contact was set incorrectly.'
 		);
 	}
